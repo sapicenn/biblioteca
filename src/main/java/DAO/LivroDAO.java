@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LivroDAO {
-    public void adicionarLivro(Livro livro) {
+    public void salvarLivroDAO(Livro livro) {
         String sql = "insert into livro(titulo, ano_publicacao, edicao, disponivel, num_paginas, editora_id, autor_id, genero_id)" +
                 "values(?, ?, ?, ?, ?, ?, ?, ?";
 
@@ -34,9 +34,9 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listarLivros() {
+    public List<Livro> listarLivrosDAO() {
         List<Livro> livros = new ArrayList<>();
-        String sql = "select id, nome from livros";
+        String sql = "select id, titulo from livros";
 
         try (Connection con = Conexao.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);
@@ -55,7 +55,7 @@ public class LivroDAO {
         return livros;
     }
 
-    public void removerLivro(Livro livro) {
+    public void removerLivroDAO(Livro livro) {
         String sql = "delete from livro where titulo = ?";
 
         try (Connection con = Conexao.getConnection();

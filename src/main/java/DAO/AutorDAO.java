@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutorDAO {
-    public void adicionarAutor(Autor autor) {
+    public void salvarAutorDAO(Autor autor) {
 
         String sql = "insert into autor(nome) values (?)";
 

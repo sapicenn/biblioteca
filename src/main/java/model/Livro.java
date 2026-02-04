@@ -11,10 +11,10 @@ public class Livro {
     private int autorId;
     private int generoId;
 
-    public Livro (int anoPublicacao, String titulo, int edicao, boolean disponivel, int numeroPaginas,
+    public Livro (String titulo, int anoPublicacao, int edicao, boolean disponivel, int numeroPaginas,
                  int editoraId, int autorId, int generoId) {
-        this.anoPublicacao = anoPublicacao;
         this.titulo = titulo;
+        this.anoPublicacao = anoPublicacao;
         this.edicao = edicao;
         this.disponivel = disponivel;
         this.numeroPaginas = numeroPaginas;
