@@ -46,4 +46,13 @@ public class LivroService {
         return livroDAO.listarLivrosDAO();
     }
 
+    public boolean removerLivro(int id) {
+        if(id <= 0) {
+            throw new IllegalArgumentException("ID inválido.");
+        }
+
+        //TODO verificar se o livro existe
+
+        return livroDAO.removerLivroDAO(id);
+    }
 }

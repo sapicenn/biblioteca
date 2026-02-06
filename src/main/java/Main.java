@@ -1,6 +1,8 @@
 import model.Autor;
+import model.Editora;
 import model.Livro;
 import service.AutorService;
+import service.EditoraService;
 import service.LivroService;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class Main {
     static Scanner teclado = new Scanner(System.in);
     static LivroService livroService = new LivroService();
     static AutorService autorService = new AutorService();
+    static EditoraService editoraService = new EditoraService();
 
     public static void main(String[] args) {
 
@@ -49,22 +52,45 @@ public class Main {
 
         switch (op) {
             case 0 -> System.exit(0);
+            case 1 -> adicionarAutor();
+            case 2 -> buscarAutores();
             case 3 -> adicionarLivro();
+            case 4 -> buscarLivros();
+            case 5 -> removerLivro();
+            case 6 -> adicionarEditora();
         }
     }
 
-    public static int validarOpcao(String opcao) {
-        if (!opcao.matches("\\d+")) {
-            throw new IllegalArgumentException("Digite apenas números");
+    public static void adicionarAutor() {
+        try {
+            System.out.println("Adicionar novo autor");
+            System.out.println("Nome: ");
+            String nome = teclado.nextLine();
+
+            Autor autor = new Autor(nome);
+            autorService.adicionarAutor(autor);
+            System.out.println("Autor adicionado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Não foi possível adicionar o autor: "+e.getMessage());
         }
+    }
 
-        int op = Integer.parseInt(opcao); //aqui "opcao" vira numero e passa o conteudo para op, que assume o controle
+    public static void buscarAutores() {
+        try {
+            System.out.println("Todos os autores: ");
+            List<Autor> autores = new ArrayList<>();
 
-        if(op < 0 || op > 9) {
-            throw new IllegalArgumentException("Escolha uma opção válida");
+            if(autores.isEmpty()) {
+                System.out.println("Nenhum autor cadastrado");
+                return;
+            }
+
+            for(Autor autor : autores) {
+                System.out.println(autor.getNome());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
-        return op;
     }
 
     public static void adicionarLivro() {
@@ -92,7 +118,7 @@ public class Main {
             System.out.println("Livro adicionado com sucesso!");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Não foi possível adicionar o livro: "+e.getMessage());
         }
     }
 
@@ -107,24 +133,49 @@ public class Main {
             }
 
             for (Livro livro : livros) {
-                System.out.println(livro.getTitulo()+" ("+ livro.getAnoPublicacao()+")");
+                System.out.println(livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+")");
             }
         } catch (Exception e) {
             System.out.println("Erro ao listar livros: "+e.getMessage());
         }
     }
 
-    public static void adicionarAutor() {
+    public static void removerLivro() {
+        System.out.println("Digite o ID do livro a ser removido: ");
+        int id = teclado.nextInt();
+
         try {
-            System.out.println("Adicionar novo autor");
+            livroService.removerLivro(id);
+            System.out.println("Livro removido com sucesso");
+        } catch (Exception e) {
+            System.out.println("Não foi possível remover o livro: "+e.getMessage());
+        }
+    }
+
+    public static void adicionarEditora() {
+        try {
             System.out.println("Nome: ");
             String nome = teclado.nextLine();
 
-            Autor autor = new Autor(nome);
-            autorService.adicionarAutor(autor);
-            System.out.println("Autor adicionado com sucesso!");
+            Editora editora = new Editora(nome);
+            editoraService.adicionarEditora(editora);
+            System.out.println("Editora adicionada com sucesso!");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Não foi possível adicionar o autor: "+e.getMessage());
         }
+    }
+
+    public static int validarOpcao(String opcao) {
+        if (!opcao.matches("\\d+")) {
+            throw new IllegalArgumentException("Digite apenas números");
+        }
+
+        int op = Integer.parseInt(opcao); //aqui "opcao" vira numero e passa o conteudo para op, que assume o controle
+
+        if(op < 0 || op > 9) {
+            throw new IllegalArgumentException("Escolha uma opção válida");
+        }
+
+        return op;
     }
 }

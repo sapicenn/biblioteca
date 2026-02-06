@@ -3,6 +3,8 @@ package service;
 import DAO.AutorDAO;
 import model.Autor;
 
+import java.util.List;
+
 public class AutorService {
 
     private AutorDAO autorDAO = new AutorDAO();
@@ -13,5 +15,9 @@ public class AutorService {
         }
 
         autorDAO.salvarAutorDAO(autor);
+    }
+
+    public List<Autor> listarAutores() {
+        return autorDAO.listarAutores();
     }
 }

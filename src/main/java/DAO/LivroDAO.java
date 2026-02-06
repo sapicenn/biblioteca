@@ -55,17 +55,18 @@ public class LivroDAO {
         return livros;
     }
 
-    public void removerLivroDAO(Livro livro) {
-        String sql = "delete from livro where titulo = ?";
+    public boolean removerLivroDAO(int id) {
+        String sql = "delete from livro where id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stm = con.prepareStatement(sql)) {
 
-            stm.setString(1, livro.getTitulo());
-            stm.execute();
+            stm.setInt(1, id);
+            return stm.execute();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 }
