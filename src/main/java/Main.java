@@ -20,7 +20,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        while(true) {
+            menu();
+        }
     }
 
     public static void menu() {
@@ -141,7 +143,7 @@ public class Main {
                 System.out.println(livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+")");
             }
         } catch (Exception e) {
-            System.out.println("Erro ao listar livros: "+e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -166,7 +168,7 @@ public class Main {
             editoraService.adicionarEditora(editora);
             System.out.println("Editora adicionada com sucesso!");
         } catch (Exception e) {
-            System.out.println("Não foi possível adicionar o autor: "+e.getMessage());
+            System.out.println("Não foi possível adicionar a editora: "+e.getMessage());
         }
     }
 

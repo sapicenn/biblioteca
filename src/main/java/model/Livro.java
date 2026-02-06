@@ -23,8 +23,10 @@ public class Livro {
         this.generoId = generoId;
     }
 
-    public Livro (String titulo) {
+    public Livro (int id, String titulo, int ano) {
+        this.id = id;
         this.titulo = titulo;
+        this.anoPublicacao = ano;
     }
 
     public int getAutorId() {
