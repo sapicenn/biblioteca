@@ -3,6 +3,8 @@ package service;
 import DAO.EditoraDAO;
 import model.Editora;
 
+import java.util.List;
+
 public class EditoraService {
 
     private EditoraDAO editoraDAO = new EditoraDAO();
@@ -13,6 +15,10 @@ public class EditoraService {
         }
 
         editoraDAO.adicionarEditora(editora);
+    }
+
+    public List<Editora> listarEditoras() {
+        return editoraDAO.listarEditoras();
     }
 
 }

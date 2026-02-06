@@ -26,9 +26,9 @@ public class GeneroDAO {
         }
     }
 
-    public List<Editora> listarEditoras() {
-        List<Editora> editoras = new ArrayList<>();
-        String sql = "select nome from editora";
+    public List<Genero> listarGeneros() {
+        List<Genero> generos = new ArrayList<>();
+        String sql = "select nome from genero";
 
         try(Connection con = Conexao.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);
@@ -36,15 +36,15 @@ public class GeneroDAO {
 
             while(result.next()) {
                 String nome = result.getString("nome");
-                Editora editora = new Editora(nome);
-                editoras.add(editora);
+                Genero genero = new Genero(nome);
+                generos.add(genero);
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return editoras;
+        return generos;
 
     }
 }
