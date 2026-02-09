@@ -14,6 +14,16 @@ public class AutorService {
             throw new IllegalArgumentException("Digite um nome válido");
         }
 
+        String nome = autor.getNome().trim();
+
+        if(nome.length() < 2 || nome.length() > 100) {
+            throw new IllegalArgumentException("O nome do autor deve ter entre 2 e 100 caracteres");
+        }
+
+        if(!nome.matches("[\\p{L} ]+")) {
+            throw new IllegalArgumentException("O nome deve conter apenas letras");
+        }
+
         autorDAO.salvarAutor(autor);
     }
 
