@@ -71,4 +71,21 @@ public class LivroDAO {
             return false;
         }
     }
+
+    public boolean atualizarStatus(int id, boolean disponivel) {
+        String sql = "update livro set disponivel = ? where id = ?";
+
+        try (Connection con = Conexao.getConnection();
+            PreparedStatement stm = con.prepareStatement(sql)) {
+
+            stm.setBoolean(1, disponivel);
+            stm.setInt(2, id);
+
+            return stm.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

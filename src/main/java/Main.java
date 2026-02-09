@@ -26,20 +26,21 @@ public class Main {
     }
 
     public static void menu() {
-        System.out.println("+-----------------------+");
-        System.out.println("|   Escolha uma opção   |");
-        System.out.println("+-----------------------+");
-        System.out.println("| 1 - Cadastrar autor   |");
-        System.out.println("| 2 - Listar autores    |");
-        System.out.println("| 3 - Cadastrar livro   |");
-        System.out.println("| 4 - Listar livros     |");
-        System.out.println("| 5 - Remover livro     |");
-        System.out.println("| 6 - Cadastrar editora |");
-        System.out.println("| 7 - Listar editoras   |");
-        System.out.println("| 8 - Cadastrar gênero  |");
-        System.out.println("| 9 - Listar gêneros    |");
-        System.out.println("| 0 - Sair              |");
-        System.out.println("+-----------------------+");
+        System.out.println("+---------------------------+");
+        System.out.println("|     Escolha uma opção     |");
+        System.out.println("+---------------------------+");
+        System.out.println("| 1 - Cadastrar autor       |");
+        System.out.println("| 2 - Listar autores        |");
+        System.out.println("| 3 - Cadastrar livro       |");
+        System.out.println("| 4 - Listar livros         |");
+        System.out.println("| 5 - Remover livro         |");
+        System.out.println("| 6 - Mudar status de livro |");
+        System.out.println("| 7 - Cadastrar editora     |");
+        System.out.println("| 8 - Listar editoras       |");
+        System.out.println("| 9 - Cadastrar gênero      |");
+        System.out.println("| 10 - Listar gêneros       |");
+        System.out.println("| 0 - Sair                  |");
+        System.out.println("+---------------------------+");
 
         int op = -1;
 
@@ -61,10 +62,11 @@ public class Main {
             case 3 -> adicionarLivro();
             case 4 -> buscarLivros();
             case 5 -> removerLivro();
-            case 6 -> adicionarEditora();
-            case 7 -> buscarEditoras();
-            case 8 -> adicionarGenero();
-            case 9 -> buscarGeneros();
+            case 6 -> atualizarLivro();
+            case 7 -> adicionarEditora();
+            case 8 -> buscarEditoras();
+            case 9 -> adicionarGenero();
+            case 10 -> buscarGeneros();
         }
     }
 
@@ -156,6 +158,26 @@ public class Main {
             System.out.println("Livro removido com sucesso");
         } catch (Exception e) {
             System.out.println("Não foi possível remover o livro: "+e.getMessage());
+        }
+    }
+
+    public static void atualizarLivro() {
+        System.out.println("Digite o ID do livro: ");
+        int id = teclado.nextInt();
+        System.out.println("Digite o novo status (true/false): ");
+        boolean status = teclado.nextBoolean();
+
+        try {
+            boolean atualizado = livroService.atualizarStatus(id, status);
+
+            if(atualizado) {
+                System.out.println("Livro atualizado com sucesso!");
+            } else {
+                System.out.println("Livro não encontrado");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o status: "+e.getMessage());
         }
     }
 

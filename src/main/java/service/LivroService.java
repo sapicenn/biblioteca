@@ -55,4 +55,12 @@ public class LivroService {
 
         return livroDAO.removerLivroDAO(id);
     }
+
+    public boolean atualizarStatus(int id, boolean disponivel) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID iválido");
+        }
+
+        return livroDAO.atualizarStatus(id, disponivel);
+    }
 }
