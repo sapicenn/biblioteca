@@ -142,7 +142,7 @@ public class Main {
             }
 
             for (Livro livro : livros) {
-                System.out.println(livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+")");
+                System.out.println(livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+") - disponível: "+livro.isDisponivel());
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

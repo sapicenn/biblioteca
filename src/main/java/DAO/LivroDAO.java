@@ -36,7 +36,7 @@ public class LivroDAO {
 
     public List<Livro> listarLivrosDAO() {
         List<Livro> livros = new ArrayList<>();
-        String sql = "select id, titulo, ano_publicacao from livro";
+        String sql = "select id, titulo, ano_publicacao, disponivel from livro";
 
         try (Connection con = Conexao.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);
@@ -46,7 +46,8 @@ public class LivroDAO {
                 String titulo = result.getString("titulo");
                 int id = result.getInt("id");
                 int ano = result.getInt("ano_publicacao");
-                Livro livro = new Livro(id, titulo, ano);
+                boolean disponivel = result.getBoolean("disponivel");
+                Livro livro = new Livro(id, titulo, ano, disponivel);
                 livros.add(livro);
             }
 
