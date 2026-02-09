@@ -13,6 +13,8 @@ public class GeneroService {
         if(genero.getNome() == null || genero.getNome().isBlank()) {
             throw new IllegalArgumentException("Digite um nome válido");
         }
+
+        generoDAO.adicionarGenero(genero);
     }
 
     public List<Genero> listarGeneros() {

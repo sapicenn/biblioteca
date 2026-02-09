@@ -13,7 +13,7 @@ import java.util.List;
 public class LivroDAO {
     public void salvarLivroDAO(Livro livro) {
         String sql = "insert into livro(titulo, ano_publicacao, edicao, disponivel, num_paginas, editora_id, autor_id, genero_id)" +
-                "values(?, ?, ?, ?, ?, ?, ?, ?";
+                "values(?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stm = con.prepareStatement(sql)) {

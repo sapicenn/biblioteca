@@ -104,7 +104,7 @@ public class Main {
         try {
             System.out.println("Adicionar novo livro");
             System.out.println("Título: ");
-            String titulo = teclado.next();
+            String titulo = teclado.nextLine();
             System.out.println("Ano de publicação: ");
             int ano = teclado.nextInt();
             System.out.println("Edição: ");
