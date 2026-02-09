@@ -1,7 +1,4 @@
-import model.Autor;
-import model.Editora;
-import model.Genero;
-import model.Livro;
+import model.*;
 import service.AutorService;
 import service.EditoraService;
 import service.GeneroService;
@@ -56,7 +53,10 @@ public class Main {
         }
 
         switch (op) {
-            case 0 -> System.exit(0);
+            case 0 -> {
+                System.out.println("Encerrando o programa");
+                System.exit(0);
+            }
             case 1 -> adicionarAutor();
             case 2 -> buscarAutores();
             case 3 -> adicionarLivro();
@@ -86,7 +86,9 @@ public class Main {
 
     public static void buscarAutores() {
         try {
-            System.out.println("Todos os autores: ");
+            System.out.println("===============================");
+            System.out.println("||    AUTORES CADASTRADOS    ||");
+            System.out.println("===============================");
             List<Autor> autores = autorService.listarAutores();
 
             if(autores.isEmpty()) {
@@ -111,8 +113,19 @@ public class Main {
             int ano = teclado.nextInt();
             System.out.println("Edição: ");
             int edicao = teclado.nextInt();
-            System.out.println("Está disponível? (true/false) ");
-            boolean disponivel = teclado.nextBoolean();
+
+            System.out.println("Status: (1 - DISPONIVEL / 2 - EMPRESTADO)");
+            int statusOpcao = teclado.nextInt();
+            StatusLivro status;
+            switch (statusOpcao) {
+                case 1 -> status = StatusLivro.DISPONIVEL;
+                case 2 -> status = StatusLivro.EMPRESTADO;
+                default -> {
+                    System.out.println("Opção inválida");
+                    return;
+                }
+            }
+
             System.out.println("Número de páginas: ");
             int paginas = teclado.nextInt();
             System.out.println("ID da editora: ");
@@ -122,7 +135,7 @@ public class Main {
             System.out.println("ID do gênero");
             int genero = teclado.nextInt();
 
-            Livro livro = new Livro(titulo, ano, edicao, disponivel, paginas, editora, autor, genero);
+            Livro livro = new Livro(titulo, ano, edicao, paginas, editora, autor, genero, status);
             livroService.adicionarLivro(livro);
             System.out.println("Livro adicionado com sucesso!");
 
@@ -133,7 +146,9 @@ public class Main {
 
     public static void buscarLivros() {
         try {
-            System.out.println("Todos os livros:");
+            System.out.println("===========================");
+            System.out.println("||   LIVROS CADASTRADOS  ||");
+            System.out.println("===========================");
             List<Livro> livros = livroService.listarLivros();
 
             if(livros.isEmpty()) {
@@ -142,7 +157,7 @@ public class Main {
             }
 
             for (Livro livro : livros) {
-                System.out.println(livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+") - disponível: "+livro.isDisponivel());
+                System.out.println("["+livro.getStatusLivro().name()+"] "+livro.getId()+". "+livro.getTitulo()+" ("+ livro.getAnoPublicacao()+")");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -164,14 +179,24 @@ public class Main {
     public static void atualizarLivro() {
         System.out.println("Digite o ID do livro: ");
         int id = teclado.nextInt();
-        System.out.println("Digite o novo status (true/false): ");
-        boolean status = teclado.nextBoolean();
+        System.out.println("Digite o novo status (1 - DISPONIVEL / 2 - EMPRESTADO) ");
+        int statusOpcao = teclado.nextInt();
+
+        StatusLivro status;
+        switch (statusOpcao) {
+            case 1 -> status = StatusLivro.DISPONIVEL;
+            case 2 -> status = StatusLivro.EMPRESTADO;
+            default -> {
+                System.out.println("Opção inválida");
+                return;
+            }
+        }
 
         try {
             boolean atualizado = livroService.atualizarStatus(id, status);
 
             if(atualizado) {
-                System.out.println("Livro atualizado com sucesso!");
+                System.out.println("Status do livro atualizado com sucesso!");
             } else {
                 System.out.println("Livro não encontrado");
             }
@@ -196,7 +221,9 @@ public class Main {
 
     public static void buscarEditoras() {
         try {
-            System.out.println("Todas as editoras");
+            System.out.println("================================");
+            System.out.println("||    EDITORAS CADASTRADAS    ||");
+            System.out.println("================================");
             List<Editora> editoras = editoraService.listarEditoras();
 
             if(editoras.isEmpty()) {
@@ -227,7 +254,9 @@ public class Main {
 
     public static void buscarGeneros() {
         try {
-            System.out.println("Todos os gêneros");
+            System.out.println("===============================");
+            System.out.println("||    GÊNEROS CADASTRADOS    ||");
+            System.out.println("===============================");
             List<Genero> generos = generoService.listarGeneros();
 
             if(generos.isEmpty()) {

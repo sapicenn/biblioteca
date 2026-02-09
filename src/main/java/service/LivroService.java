@@ -2,6 +2,7 @@ package service;
 
 import model.Livro;
 import DAO.LivroDAO;
+import model.StatusLivro;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +11,7 @@ public class LivroService {
 
     private LivroDAO livroDAO = new LivroDAO();
 
-    public void adicionarLivro(Livro livro) throws Exception {
+    public void adicionarLivro(Livro livro) {
         if(livro.getTitulo() == null || livro.getTitulo().isBlank()) {
             throw new IllegalArgumentException("O livro deve conter um título");
         }
@@ -39,11 +40,11 @@ public class LivroService {
             throw new IllegalArgumentException("Digite um ID válido");
         }
 
-        livroDAO.salvarLivroDAO(livro);
+        livroDAO.salvarLivro(livro);
     }
 
-    public List<Livro> listarLivros() throws Exception {
-        return livroDAO.listarLivrosDAO();
+    public List<Livro> listarLivros() {
+        return livroDAO.listarLivros();
     }
 
     public boolean removerLivro(int id) {
@@ -51,16 +52,14 @@ public class LivroService {
             throw new IllegalArgumentException("ID inválido.");
         }
 
-        //TODO verificar se o livro existe
-
-        return livroDAO.removerLivroDAO(id);
+        return livroDAO.removerLivro(id);
     }
 
-    public boolean atualizarStatus(int id, boolean disponivel) {
+    public boolean atualizarStatus(int id, StatusLivro status) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID iválido");
+            throw new IllegalArgumentException("ID inválido");
         }
 
-        return livroDAO.atualizarStatus(id, disponivel);
+        return livroDAO.atualizarStatus(id, status);
     }
 }

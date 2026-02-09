@@ -22,7 +22,7 @@ public class GeneroDAO {
             stm.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao cadastrar gênero", e);
         }
     }
 
@@ -41,7 +41,7 @@ public class GeneroDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao listar gêneros", e);
         }
 
         return generos;

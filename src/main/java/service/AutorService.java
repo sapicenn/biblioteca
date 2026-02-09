@@ -14,7 +14,7 @@ public class AutorService {
             throw new IllegalArgumentException("Digite um nome válido");
         }
 
-        autorDAO.salvarAutorDAO(autor);
+        autorDAO.salvarAutor(autor);
     }
 
     public List<Autor> listarAutores() {

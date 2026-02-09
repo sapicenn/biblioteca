@@ -5,29 +5,29 @@ public class Livro {
     private String titulo;
     private int anoPublicacao;
     private int edicao;
-    private boolean disponivel;
     private int numeroPaginas;
     private int editoraId;
     private int autorId;
     private int generoId;
+    private StatusLivro statusLivro;
 
-    public Livro (String titulo, int anoPublicacao, int edicao, boolean disponivel, int numeroPaginas,
-                 int editoraId, int autorId, int generoId) {
+    public Livro (String titulo, int anoPublicacao, int edicao, int numeroPaginas,
+                 int editoraId, int autorId, int generoId, StatusLivro status) {
         this.titulo = titulo;
         this.anoPublicacao = anoPublicacao;
         this.edicao = edicao;
-        this.disponivel = disponivel;
         this.numeroPaginas = numeroPaginas;
         this.editoraId = editoraId;
         this.autorId = autorId;
         this.generoId = generoId;
+        this.statusLivro = status;
     }
 
-    public Livro (int id, String titulo, int ano, boolean disponivel) {
+    public Livro (int id, String titulo, int ano, StatusLivro status) {
         this.id = id;
         this.titulo = titulo;
         this.anoPublicacao = ano;
-        this.disponivel = disponivel;
+        this.statusLivro = status;
     }
 
     public int getAutorId() {
@@ -50,10 +50,6 @@ public class Livro {
         return edicao;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
     public int getNumeroPaginas() {
         return numeroPaginas;
     }
@@ -64,6 +60,14 @@ public class Livro {
 
     public int getGeneroId() {
         return generoId;
+    }
+
+    public StatusLivro getStatusLivro() {
+        return statusLivro;
+    }
+
+    public void setStatusLivro(StatusLivro status) {
+        this.statusLivro = status;
     }
 
     @Override

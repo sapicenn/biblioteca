@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutorDAO {
-    public void salvarAutorDAO(Autor autor) {
+    public void salvarAutor(Autor autor) {
 
         String sql = "insert into autor(nome) values (?)";
 
@@ -22,7 +22,7 @@ public class AutorDAO {
             stm.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao cadastrar autor", e);
         }
     }
 
@@ -41,7 +41,7 @@ public class AutorDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao listar os autores", e);
         }
 
         return autores;

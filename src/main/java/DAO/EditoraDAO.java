@@ -21,7 +21,7 @@ public class EditoraDAO {
             stm.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao cadastrar editora", e);
         }
     }
 
@@ -40,7 +40,7 @@ public class EditoraDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao listar editoras", e);
         }
 
         return editoras;
